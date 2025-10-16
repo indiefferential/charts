@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 20 Spotify Artists</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #0a0a0a, #000);
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-radius: 20px;
+    }
+    .rank {
+      background: linear-gradient(135deg, #1db954, #1ed760);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+
+  <!-- Header -->
+  <header class="text-center py-10">
+    <h1 class="text-5xl font-extrabold tracking-wide rank">🔥 Top 20 Spotify Artists</h1>
+    <p class="text-neutral-400 mt-3">Global • Updated Weekly</p>
+  </header>
+
+  <!-- Chart Container -->
+  <section class="max-w-6xl mx-auto px-4 space-y-10">
+    
+    <!-- Chart Card Template -->
+    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#1</div>
+        <div class="flex-1 w-full">
+          <iframe width="100%" height="352" style="border-radius: 16px;"
+            src="https://open.spotify.com/embed/artist/0PYoQyfkI47SQecvr8Z4Gz?utm_source=generator"
+            frameborder="0" allowfullscreen="allowfullscreen"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#2</div>
+        <div class="flex-1 w-full">
+          <iframe width="100%" height="352" style="border-radius: 16px;"
+            src="https://open.spotify.com/embed/artist/5msXBb6IGbp0CM1OqpuCzx?utm_source=generator"
+            frameborder="0" allowfullscreen="allowfullscreen"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#3</div>
+        <div class="flex-1 w-full">
+          <iframe width="100%" height="352" style="border-radius: 16px;"
+            src="https://open.spotify.com/embed/artist/3uq5NYdIAEcy7enyCOmbWb?utm_source=generator"
+            frameborder="0" allowfullscreen="allowfullscreen"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keep going with your remaining embeds... -->
+    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#4</div>
+        <div class="flex-1 w-full">
+          <iframe width="100%" height="352" style="border-radius: 16px;"
+            src="https://open.spotify.com/embed/artist/1NBpCkfvVMi6QYM6uncCnk?utm_source=generator"
+            frameborder="0" allowfullscreen="allowfullscreen"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#5</div>
+        <div class="flex-1 w-full">
+          <iframe width="100%" height="352" style="border-radius: 16px;"
+            src="https://open.spotify.com/embed/artist/3dzpOn3AeYYsXxaAKKsQoI?utm_source=generator"
+            frameborder="0" allowfullscreen="allowfullscreen"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Continue duplicating up to #20 with your remaining links -->
+    
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-neutral-500 text-sm mt-16 mb-8">
+    © 2025 Indiefferential • Glass Design by GASK MEDIA <span class="rank font-semibold">Spotify Chart System</span>
+  </footer>
+
+</body>
+</html>
