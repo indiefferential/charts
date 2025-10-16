@@ -8,22 +8,41 @@
   <style>
     body {
       background: radial-gradient(circle at top, #0a0a0a, #000);
+      font-family: 'Inter', sans-serif;
     }
+
     .glass {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
       border-radius: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
     }
+
+    .glass:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 28px rgba(255,255,255,0.1);
+    }
+
     .rank {
-      background: linear-gradient(135deg, #1db954, #1ed760);
+      background: linear-gradient(135deg, #ffffff, #a0c4ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+
+    iframe {
+      border-radius: 16px;
+      width: 100%;
+      height: 280px;
+      display: block;
+      box-shadow: 0 0 20px rgba(255,255,255,0.05);
     }
   </style>
 </head>
-<body class="text-white font-sans">
+<body class="text-white">
 
   <!-- Header -->
   <header class="text-center py-10">
@@ -32,77 +51,66 @@
   </header>
 
   <!-- Chart Container -->
-  <section class="max-w-6xl mx-auto px-4 space-y-10">
-    
-    <!-- Chart Card Template -->
-    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#1</div>
-        <div class="flex-1 w-full">
-          <iframe width="100%" height="352" style="border-radius: 16px;"
-            src="https://open.spotify.com/embed/artist/0PYoQyfkI47SQecvr8Z4Gz?utm_source=generator"
-            frameborder="0" allowfullscreen="allowfullscreen"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-        </div>
-      </div>
+  <section class="max-w-6xl mx-auto px-4 space-y-1">
+
+    <!-- Repeat this div for each chart position -->
+    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
+      <div class="text-3xl rank w-14 text-center sm:mr-4">#1</div>
+      <iframe
+        src="https://open.spotify.com/embed/artist/0PYoQyfkI47SQecvr8Z4Gz?utm_source=generator"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
     </div>
 
-    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#2</div>
-        <div class="flex-1 w-full">
-          <iframe width="100%" height="352" style="border-radius: 16px;"
-            src="https://open.spotify.com/embed/artist/5msXBb6IGbp0CM1OqpuCzx?utm_source=generator"
-            frameborder="0" allowfullscreen="allowfullscreen"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-        </div>
-      </div>
+    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
+      <div class="text-3xl rank w-14 text-center sm:mr-4">#2</div>
+      <iframe
+        src="https://open.spotify.com/embed/artist/5msXBb6IGbp0CM1OqpuCzx?utm_source=generator"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
     </div>
 
-    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#3</div>
-        <div class="flex-1 w-full">
-          <iframe width="100%" height="352" style="border-radius: 16px;"
-            src="https://open.spotify.com/embed/artist/3uq5NYdIAEcy7enyCOmbWb?utm_source=generator"
-            frameborder="0" allowfullscreen="allowfullscreen"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-        </div>
-      </div>
+    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
+      <div class="text-3xl rank w-14 text-center sm:mr-4">#3</div>
+      <iframe
+        src="https://open.spotify.com/embed/artist/3uq5NYdIAEcy7enyCOmbWb?utm_source=generator"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
     </div>
 
-    <!-- Keep going with your remaining embeds... -->
-    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#4</div>
-        <div class="flex-1 w-full">
-          <iframe width="100%" height="352" style="border-radius: 16px;"
-            src="https://open.spotify.com/embed/artist/1NBpCkfvVMi6QYM6uncCnk?utm_source=generator"
-            frameborder="0" allowfullscreen="allowfullscreen"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-        </div>
-      </div>
+    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
+      <div class="text-3xl rank w-14 text-center sm:mr-4">#4</div>
+      <iframe
+        src="https://open.spotify.com/embed/artist/1NBpCkfvVMi6QYM6uncCnk?utm_source=generator"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
     </div>
 
-    <div class="glass p-6 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-green-600/20">
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <div class="text-4xl font-extrabold rank w-16 text-center sm:text-left sm:mr-6">#5</div>
-        <div class="flex-1 w-full">
-          <iframe width="100%" height="352" style="border-radius: 16px;"
-            src="https://open.spotify.com/embed/artist/3dzpOn3AeYYsXxaAKKsQoI?utm_source=generator"
-            frameborder="0" allowfullscreen="allowfullscreen"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-        </div>
-      </div>
+    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
+      <div class="text-3xl rank w-14 text-center sm:mr-4">#5</div>
+      <iframe
+        src="https://open.spotify.com/embed/artist/3dzpOn3AeYYsXxaAKKsQoI?utm_source=generator"
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
     </div>
 
-    <!-- Continue duplicating up to #20 with your remaining links -->
-    
+    <!-- Continue duplicating up to #20 with your remaining Spotify links -->
+
   </section>
 
   <!-- Footer -->
