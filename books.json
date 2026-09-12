@@ -1,0 +1,12 @@
+[
+ {
+    "slug": "wnsep2",
+    "title": "WN — Sep 2",
+    "type": "images",
+    "folder": "books/wnsep2/pages",
+    "totalPages": 34,
+    "ext": "jpg",
+    "pattern": "page{n}",
+    "cover": "books/wnsep2/pages/page01.jpg"
+  }
+]
