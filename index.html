@@ -1,161 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Top 20 Spotify Artists</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Library</title>
+
   <style>
+    :root {
+      --red: #e21b2d;
+      --ink: #0a0a0a;
+      --paper: #ffffff;
+      --soft: #f5f5f3;
+      --line: #d9d9d7;
+      --muted: #77736f;
+
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Arial, Helvetica, sans-serif;
+
+      --shadow: 7px 7px 0 var(--ink);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: radial-gradient(circle at top, #0a0a0a, #000);
-      font-family: 'Inter', sans-serif;
+      margin: 0;
+      min-height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
     }
 
-    .glass {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      border-radius: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    ::selection {
+      background: var(--red);
+      color: #fff;
+    }
+
+    header {
+      position: relative;
+      padding: clamp(65px, 10vw, 125px) 4.5vw clamp(45px, 6vw, 75px);
+      text-align: left;
+      border-bottom: 1px solid var(--ink);
       overflow: hidden;
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0 49.9%,
+          rgba(10, 10, 10, .045) 50%,
+          transparent 50.1%
+        ),
+        linear-gradient(
+          0deg,
+          transparent 0 49.9%,
+          rgba(10, 10, 10, .045) 50%,
+          transparent 50.1%
+        );
     }
 
-    .glass:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 28px rgba(255,255,255,0.1);
-    }
-
-    .rank {
-      background: linear-gradient(135deg, #ffffff, #a0c4ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    header::before {
+      content: "INDIEFFERENTIAL / MAGAZINE";
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 62px;
+      padding: 0 4.5vw;
+      border-bottom: 1px solid var(--line);
+      color: var(--red);
+      font-family: var(--sans);
+      font-size: 11px;
       font-weight: 800;
+      letter-spacing: .16em;
     }
 
-    iframe {
-      border-radius: 16px;
-      width: 100%;
-      height: 280px;
+    header::after {
+      content: "ARCHIVE";
+      position: absolute;
+      right: 1vw;
+      bottom: -18px;
+      color: var(--red);
+      font-family: var(--serif);
+      font-size: clamp(90px, 18vw, 245px);
+      font-weight: 900;
+      letter-spacing: -.11em;
+      line-height: .8;
+      opacity: .065;
+      pointer-events: none;
+    }
+
+    header h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 0 25px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(58px, 9vw, 135px);
+      font-weight: 900;
+      letter-spacing: -.08em;
+      line-height: .84;
+    }
+
+    header h1::after {
+      content: ".";
+      color: var(--red);
+    }
+
+    header p {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      margin: 0;
+      border-top: 4px solid var(--ink);
+      padding-top: 15px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: clamp(19px, 2.3vw, 27px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+    }
+
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 55px 28px;
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: clamp(65px, 9vw, 110px) 4.5vw 100px;
+    }
+
+    .card {
       display: block;
-      box-shadow: 0 0 20px rgba(255,255,255,0.05);
+      position: relative;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .cover {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 8.5 / 11;
+      background: #fff;
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+
+    .card:hover .cover {
+      transform: translate(-3px, -3px);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+
+    .cover img,
+    .cover canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cover .spine {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, .28),
+        transparent
+      );
+      pointer-events: none;
+    }
+
+    .card .meta {
+      padding: 17px 1px 0;
+    }
+
+    .card .title {
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.035em;
+      line-height: 1.05;
+    }
+
+    .card .pages {
+      margin-top: 8px;
+      color: var(--red);
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .card .meta::before {
+      content: "ISSUE";
+      display: block;
+      margin-bottom: 7px;
+      color: var(--red);
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    #empty,
+    #err {
+      max-width: 1000px;
+      margin: 0 auto 80px;
+      padding: 55px 25px;
+      border: 1px solid var(--ink);
+      background: var(--soft);
+      color: var(--ink);
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 1;
+    }
+
+    code {
+      padding: 3px 6px;
+      border-radius: 0;
+      background: rgba(226, 27, 45, .08);
+      color: var(--red);
+      font-family: monospace;
+    }
+
+    @media (max-width: 1050px) {
+      #grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 800px) {
+      #grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 45px 24px;
+      }
+
+      header h1 {
+        font-size: clamp(55px, 13vw, 100px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 105px 20px 50px;
+      }
+
+      header::before {
+        padding: 0 20px;
+        font-size: 9px;
+      }
+
+      header h1 {
+        font-size: clamp(52px, 16vw, 85px);
+        letter-spacing: -.075em;
+      }
+
+      header p {
+        font-size: 20px;
+      }
+
+      #grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 60px 20px 70px;
+        gap: 40px 16px;
+      }
+
+      .cover {
+        box-shadow: 5px 5px 0 var(--ink);
+      }
+
+      .card:hover .cover {
+        box-shadow: 7px 7px 0 var(--ink);
+      }
+
+      .card .title {
+        font-size: 17px;
+      }
+
+      .card .pages {
+        font-size: 8px;
+      }
+
+      #empty,
+      #err {
+        margin-inline: 20px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      #grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cover {
+        max-width: 320px;
+      }
     }
   </style>
 </head>
-<body class="text-white">
 
-  <!-- Header -->
-  <header class="text-center py-10">
-    <h1 class="text-5xl font-extrabold tracking-wide rank">🔥 Top 20 Spotify Artists</h1>
-    <p class="text-neutral-400 mt-3">Global • Updated Weekly</p>
-  </header>
+<body>
 
-  <!-- Chart Container -->
-  <section class="max-w-6xl mx-auto px-4 space-y-1">
+<header>
+  <h1>Issue Library</h1>
+  <p>Pick an issue to open it as a flipbook</p>
+</header>
 
-    <!-- Spotify Chart Cards -->
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#1</div>
-      <iframe src="https://open.spotify.com/embed/artist/5JczFz8Mk896Fd7jhbL1zB?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+<div id="grid"></div>
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#2</div>
-      <iframe src="https://open.spotify.com/embed/artist/3Ffn2rC10WkQ9AIHy9Odgq?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+<div id="empty">
+  No issues yet — add one to <code>books.json</code>.
+</div>
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#3</div>
-      <iframe src="https://open.spotify.com/embed/artist/0K0V3z0EyXUUItgtJboGeZ?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+<div id="err">
+  Could not load <code>books.json</code>. If you're testing locally by double-clicking this file, run a local server instead (see README) — browsers block local file fetches.
+</div>
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#4</div>
-      <iframe src="https://open.spotify.com/embed/artist/5EAaUfQW63Kf6xqFcHyqyG?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js"></script>
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#5</div>
-      <iframe src="https://open.spotify.com/embed/artist/0PYoQyfkI47SQecvr8Z4Gz?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+<script>
+(async function(){
+  if (window.pdfjsLib) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.worker.min.js";
+  }
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#6</div>
-      <iframe src="https://open.spotify.com/embed/artist/5msXBb6IGbp0CM1OqpuCzx?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+  const grid = document.getElementById('grid');
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#7</div>
-      <iframe src="https://open.spotify.com/embed/artist/3uq5NYdIAEcy7enyCOmbWb?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+  async function pdfFirstPageThumb(file, imgEl){
+    try {
+      const pdf = await pdfjsLib.getDocument(file).promise;
+      const page = await pdf.getPage(1);
+      const base = page.getViewport({ scale: 1 });
+      const scale = 400 / base.width;
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      await page.render({
+        canvasContext: canvas.getContext('2d'),
+        viewport
+      }).promise;
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#8</div>
-      <iframe src="https://open.spotify.com/embed/artist/1NBpCkfvVMi6QYM6uncCnk?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+      imgEl.replaceWith(canvas);
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#9</div>
-      <iframe src="https://open.spotify.com/embed/artist/3dzpOn3AeYYsXxaAKKsQoI?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.display = 'block';
+    } catch (err) {
+      // leave placeholder as-is if rendering fails
+    }
+  }
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#10</div>
-      <iframe src="https://open.spotify.com/embed/artist/49XwhbrV52y6COqZ1oudUI?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+  try {
+    const res = await fetch('books.json');
 
-    <!-- Continue #11–#20 -->
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#11</div>
-      <iframe src="https://open.spotify.com/embed/artist/5iC2sNSxlmwYVc62FCjuCt?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    if (!res.ok) throw new Error('missing');
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#12</div>
-      <iframe src="https://open.spotify.com/embed/artist/6wiUtC02Ig2WsFW7L6LSnL?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    const books = await res.json();
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#13</div>
-      <iframe src="https://open.spotify.com/embed/artist/5b4jd1Y2VGMBHpNMisBEh1?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    if (!books.length){
+      document.getElementById('empty').style.display = 'block';
+      return;
+    }
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#14</div>
-      <iframe src="https://open.spotify.com/embed/artist/1lpZr1ko4ZIvgMzvrO2gas?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+    books.forEach(b => {
+      const isPdf = b.type === 'pdf';
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#15</div>
-      <iframe src="https://open.spotify.com/embed/artist/0wx3cuWLhMVkPA6dnMjNLd?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = `viewer.html?book=${encodeURIComponent(b.slug)}`;
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#16</div>
-      <iframe src="https://open.spotify.com/embed/artist/4CakYCPxIEld69PdaVASvt?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+      const pagesLabel = isPdf ? 'PDF' : `${b.totalPages} pages`;
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#17</div>
-      <iframe src="https://open.spotify.com/embed/artist/31G11QVprbpNYOWrFIHY0K?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+      a.innerHTML = `
+        <div class="cover">
+          <div class="spine"></div>
+          <img alt="${b.title} cover" loading="lazy">
+        </div>
+        <div class="meta">
+          <div class="title">${b.title}</div>
+          <div class="pages">${pagesLabel}</div>
+        </div>
+      `;
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#18</div>
-      <iframe src="https://open.spotify.com/embed/artist/68CqsDPlGOWewUyEYvuDhu?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+      const imgEl = a.querySelector('img');
 
-    <div class="glass flex items-center transition-all duration-500 hover:scale-[1.02]">
-      <div class="text-3xl rank w-14 text-center sm:mr-4">#19</div>
-      <iframe src="https://open.spotify.com/embed/artist/5hHjJoLQMTdvH60ErBDwNG?utm_source=generator" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
+      if (isPdf && b.cover) {
+        imgEl.src = b.cover;
+      } else if (isPdf) {
+        pdfFirstPageThumb(b.file, imgEl);
+      } else {
+        imgEl.src = b.cover;
+      }
 
-  </section>
+      grid.appendChild(a);
+    });
 
-  <!-- Footer -->
-  <footer class="text-center text-neutral-500 text-sm mt-16 mb-8">
-    © 2025 Indiefferential • Glass Design by GASK MEDIA <span class="rank font-semibold">Spotify Chart System</span>
-  </footer>
+  } catch (err) {
+    document.getElementById('err').style.display = 'block';
+  }
+})();
+</script>
 
 </body>
 </html>
